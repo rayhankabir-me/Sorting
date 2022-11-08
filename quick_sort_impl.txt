@@ -1,0 +1,92 @@
+#include<iostream>
+using namespace std;
+
+#define SIZE 5
+
+void take_input(int arr[]);
+void print_array(int arr[]);
+void swap_int_values(int *x, int *y);
+void quick_sort(int arr[], int p, int r);
+int quick_sort_partition(int arr[], int p, int r);
+
+// take input values from the user
+void take_input(int arr[])
+{
+    cout << "Enter 5 integer values: ";
+	for(int i = 0; i < SIZE; i++)
+		cin >> arr[i];
+}
+
+// print all values of an array
+void print_array(int arr[])
+{
+	for(int i = 0; i < SIZE; i++)
+		cout << arr[i] << " ";
+    cout << endl;
+}
+
+// exchanging the values of two integer variables
+void swap_int_values(int *x, int *y)
+{
+	int temp = *x;
+	*x = *y;
+	*y = temp;
+}
+
+// implementing quick sort
+void quick_sort(int arr[], int p, int r)
+{
+    if(p < r)
+    {
+        int q = quick_sort_partition(arr, p, r);
+        quick_sort(arr, p, q);
+        quick_sort(arr, q+1, r);
+    }
+}
+
+int quick_sort_partition(int arr[], int p, int r)
+{
+    int x = arr[p];
+    int i = p-1;
+    int j = r+1;
+
+    while(1)
+    {
+        while(1)
+        {
+            j--;
+            if(arr[j]<=x)
+                break;
+        }
+
+        while(1)
+        {
+            i++;
+            if(arr[i]>=x)
+                break;
+        }
+
+        if(i < j)
+            swap_int_values(&arr[i], &arr[j]);
+        else
+            return j;
+    }
+}
+
+
+// test the implemented functions in the main()
+int main()
+{
+    int arr[SIZE];
+
+    // testing quick sort
+	take_input(arr);
+	cout << "Printing the array values: ";
+	print_array(arr);
+	quick_sort(arr, 0, SIZE-1);
+	cout << "Printing the array values after quick sort: ";
+	print_array(arr);
+	cout << endl;
+
+    return 0;
+}

@@ -1,0 +1,128 @@
+#include<iostream>
+using namespace std;
+
+#define SIZE 5
+
+void input(int arr[]);
+void print(int arr[]);
+int sum(int arr[]);
+int min(int arr[]);
+int max(int arr[]);
+int search(int arr[], int x);
+void sort(int arr[]);
+void swap(int *x, int *y);
+
+// take input values from the user
+void input(int arr[])
+{
+    cout << "Enter 5 integer values: ";
+	for(int i=0; i<SIZE; i++)
+		cin >> arr[i];
+}
+
+// print all values of an array
+void print(int arr[])
+{
+	for(int i=0; i<SIZE; i++)
+		cout << arr[i] << " ";
+    cout << endl;
+}
+
+// summation of all values of an array
+int sum(int arr[])
+{
+	int s=0;
+	for(int i=0; i<SIZE; i++)
+		s += arr[i];
+
+	return s;
+}
+
+// finding the minimum value from
+// a list of values stored in an array
+int min(int arr[])
+{
+	int m=arr[0];
+	for(int i=1; i<SIZE; i++)
+	{
+		if(arr[i] < m)
+			m = arr[i];
+	}
+
+	return m;
+}
+
+// finding the maximum value from
+// a list of values stored in an array
+int max(int arr[])
+{
+	int m=arr[0];
+	for(int i=1; i<SIZE; i++)
+	{
+		if(arr[i] > m)
+			m = arr[i];
+	}
+
+	return m;
+}
+
+// search for a specific value in an array
+int search(int arr[], int x)
+{
+    int i;
+    for (i = 0; i < SIZE; i++)
+        if (arr[i] == x)
+            return i;
+    return -1;
+}
+
+// apply sorting in an array
+void sort(int arr[])
+{
+    int i, j;
+    for (i=0; i<SIZE-1; i++)
+        for (j=0; j<SIZE-i-1; j++)
+            if (arr[j] > arr[j+1])
+                swap(&arr[j], &arr[j+1]);
+}
+
+// exchanging the values of two integer variables
+void swap(int *x, int *y)
+{
+	int temp = *x;
+	*x = *y;
+	*y = temp;
+}
+
+// test the implemented functions in the main()
+int main()
+{
+	int arr[SIZE], x;
+
+	input(arr);
+	cout << "Printing the given values: ";
+	print(arr);
+
+	int s = sum(arr);
+	cout << "summation = " << s << endl;
+
+    int m1 = min(arr);
+	cout << "min value = " << m1 << endl;
+
+	int m2 = max(arr);
+	cout << "max value = " << m2 << endl;
+
+	cout << "Which value do you want to search? ";
+	cin >> x;
+	int ind = search(arr, x);
+	if(ind != -1)
+        cout << "The value found in the index " << ind << endl;
+    else
+        cout << "Value not found!" << endl;
+
+	sort(arr);
+	cout << "Printing the array values after sorting\n";
+	print(arr);
+
+	return 0;
+}
